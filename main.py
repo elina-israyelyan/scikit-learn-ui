@@ -9,20 +9,26 @@ from sklearn.linear_model import LinearRegression, LogisticRegression
 
 app = dash.Dash(__name__)
 
+# Define CSS styles
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
 # Define app layout
 app.layout = html.Div([
     html.H1("Model Selection and Data Upload"),
 
     # Dropdown for model selection
-    html.Label("Select a model:"),
-    dcc.Dropdown(
-        id='model-dropdown',
-        options=[
-            {'label': 'Linear Regression', 'value': 'linear_regression'},
-            {'label': 'Logistic Regression', 'value': 'logistic_regression'},
-        ],
-        value=None
-    ),
+    html.Div([
+        html.Label("Select a model:"),
+        dcc.Dropdown(
+            id='model-dropdown',
+            options=[
+                {'label': 'Linear Regression', 'value': 'linear_regression'},
+                {'label': 'Logistic Regression', 'value': 'logistic_regression'},
+            ],
+            value=None
+        ),
+    ], style={'margin-bottom': '20px'}),
 
     # File upload component
     dcc.Upload(
